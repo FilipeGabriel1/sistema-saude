@@ -9,12 +9,12 @@ public class Exame {
     private LocalDate dataExame;
     private String resultado;
 
-    public Exame(int id, String tipoExame, LocalDate dataExame, String resultado) {
-        this.id = id;
-        this.tipoExame = tipoExame;
-        this.dataExame = dataExame;
-        this.resultado = resultado;
-    }
+   public Exame(int id, java.time.LocalDate dataExame, String resultado, String tipoExame) {
+    this.id = id;
+    this.dataExame = dataExame;
+    this.resultado = resultado;
+    this.tipoExame = tipoExame;
+}
 
     public int getId() {
         return id;
@@ -47,5 +47,15 @@ public class Exame {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
+
+    @Override
+public String toString() {
+    return "Exame{" +
+            "id=" + id +
+            ", dataExame=" + dataExame +
+            ", resultado='" + resultado + '\'' +
+            ", tipoExame='" + tipoExame + '\'' +
+            '}';
+}
 
 }
