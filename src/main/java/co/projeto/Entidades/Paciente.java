@@ -4,8 +4,10 @@ public class Paciente  extends Pessoa {
 
     private int id;
 
-        public Paciente(int pessoa_id, String nome, String cpf, String telefone, String email, String senha) {
-        super(pessoa_id, nome, cpf, telefone, email, senha);
+        public Paciente( int id, String nome, String cpf, String telefone, String email, String senha) {
+        super(nome, cpf, telefone, email, senha);
+
+        this.id = id;
 
     }
     public int getId() {
@@ -14,6 +16,18 @@ public class Paciente  extends Pessoa {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+public String toString() {
+    return "Paciente{" +
+            "id=" + id +
+            ", nome='" + nome + '\'' +
+            ", cpf='" + cpf + '\'' +
+            ", telefone='" + telefone + '\'' +
+            ", email='" + email + '\'' +
+            ", senha='" + senha + '\'' +
+            '}';
+}
 
 
 }

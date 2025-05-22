@@ -2,15 +2,15 @@ package co.projeto.Entidades;
 
 public abstract class Pessoa {
 
-    private int pessoa_id;
-    private String nome;
-    private String cpf;
-    private String telefone;
-    private String email;
-    private String senha;
 
-    public Pessoa (int pessoa_id, String nome, String cpf, String telefone, String email, String senha) {
-        this.pessoa_id = pessoa_id;
+    protected String nome;
+    protected String cpf;
+    protected String telefone;
+    protected String email;
+    protected String senha;
+
+    public Pessoa ( String nome, String cpf, String telefone, String email, String senha) {
+        
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -18,13 +18,7 @@ public abstract class Pessoa {
         this.senha = senha;
     }
 
-    public int getPessoa_id() {
-        return pessoa_id;
-    }
-
-    public void setPessoa_id(int pessoa_id) {
-        this.pessoa_id = pessoa_id;
-    }
+   
     public String getNome() {
         return nome;
     }

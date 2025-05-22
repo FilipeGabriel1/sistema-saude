@@ -27,7 +27,7 @@ public class RepositorioConsulta implements InterfaceConsulta {
 
             stmt.setTimestamp(1, java.sql.Timestamp.valueOf(consulta.getDataConsulta()));
             stmt.setInt(2, consulta.getId());
-            stmt.setInt(3, consulta.getMedico().getId());
+            stmt.setInt(3, consulta.getMedico().getCrm());
             stmt.setInt(4, consulta.getPaciente().getId());
 
             stmt.executeUpdate();

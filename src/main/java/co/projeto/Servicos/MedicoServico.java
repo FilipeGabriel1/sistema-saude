@@ -30,7 +30,7 @@ public class MedicoServico {
     }
 
     public Medico buscarMedicoPorId(int idMedico) {
-        return this.repositorioMedico.buscarMedicoPorId(idMedico);
+        return this.repositorioMedico.buscarMedicoPorCrm(idMedico);
     }
 
 }

@@ -6,8 +6,8 @@ package co.projeto.Entidades;
     private int id;
     private String turno;
 
-    public Recepcionista(int pessoa_id, String nome, String cpf, String telefone, String email, String senha, String turno) {
-        super(pessoa_id, nome, cpf, telefone, email, senha);
+    public Recepcionista( String nome, String cpf, String telefone, String email, String senha, String turno) {
+        super( nome, cpf, telefone, email, senha);
         this.turno = turno;
     }
     public int getId() {

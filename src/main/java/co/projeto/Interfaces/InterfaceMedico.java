@@ -13,6 +13,6 @@ public interface InterfaceMedico {
 
     List<Medico> listarMedicos();
 
-    Medico buscarMedicoPorId(int id);
+    Medico buscarMedicoPorCrm(int crm);
     
 }
