@@ -79,25 +79,29 @@ public class RepositorioMedico implements InterfaceMedico {
     }
 
     public ArrayList<Medico> listarMedicos() {
-         var sql = "Select * from medico";
+        ArrayList<Medico> medicos = new ArrayList<>();
+        String sql = "SELECT * FROM medico";
 
-            try (var conexão = Conexao.obterConexao();
-             var stmt = conexão.prepareStatement(sql)) {
+        try (var conexao = Conexao.obterConexao();
+             var stmt = conexao.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-        try(ResultSet rs = stmt.executeQuery()){
             while (rs.next()) {
-               Medico medico = new Medico(rs.getInt("crm"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("especialidade")
-                );
-                medicoList.add(medico);
- 
+                int crm = rs.getInt("crm");
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                String telefone = rs.getString("telefone");
+                String email = rs.getString("email");
+                String senha = rs.getString("senha");
+                String especialidade = rs.getString("especialidade");
+
+                Medico medico = new Medico(crm, nome, cpf, telefone, email, senha, especialidade);
+                medicos.add(medico);
             }
-        }
-
         } catch (SQLException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
-
-        return medicoList;
+        return medicos;
     }
 
 

@@ -9,7 +9,7 @@ public class Exame {
     private LocalDate dataExame;
     private String resultado;
 
-   public Exame(int id, java.time.LocalDate dataExame, String resultado, String tipoExame) {
+   public Exame(int id, String resultado, java.time.LocalDate dataExame, String tipoExame) {
     this.id = id;
     this.dataExame = dataExame;
     this.resultado = resultado;

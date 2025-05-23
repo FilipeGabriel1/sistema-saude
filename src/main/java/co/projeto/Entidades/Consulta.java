@@ -1,18 +1,19 @@
 package co.projeto.Entidades;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class Consulta {
 
     private int id;
     private Paciente paciente;
     private Medico medico;
-    private LocalDateTime dataConsulta;
+    private LocalDate dataConsulta;
 
-    public Consulta(int id, Paciente paciente, Medico medico, LocalDateTime dataConsulta) {
+    public Consulta(int id, Paciente pacienteId, Medico medicoId, LocalDate dataConsulta) {
         this.id = id;
-        this.paciente = paciente;
-        this.medico = medico;
+        this.paciente = pacienteId;
+        this.medico = medicoId;
         this.dataConsulta = dataConsulta;
     
     }
@@ -35,10 +36,10 @@ public class Consulta {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
-    public LocalDateTime getDataConsulta() {
+    public LocalDate getDataConsulta() {
         return dataConsulta;
     }
-    public void setDataConsulta(LocalDateTime dataConsulta) {
+    public void setDataConsulta(LocalDate dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 

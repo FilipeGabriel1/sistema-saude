@@ -1,8 +1,10 @@
 package co.projeto.Repositorio;
 
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -10,14 +12,20 @@ import co.projeto.Interfaces.InterfaceConsulta;
 import co.projeto.Conexao;
 import co.projeto.Entidades.Consulta;
 import co.projeto.Entidades.Exame;
+import co.projeto.Entidades.Medico;
+import co.projeto.Entidades.Paciente;
 
 
 
 public class RepositorioConsulta implements InterfaceConsulta {
     private ArrayList<Consulta> consultaList;
+    private RepositorioPaciente repositorioPaciente;
+    private RepositorioMedico repositorioMedico;
 
     public RepositorioConsulta() {
         this.consultaList = new ArrayList<>();
+        this.repositorioPaciente = new RepositorioPaciente();
+        this.repositorioMedico = new RepositorioMedico();
     }
 
     public void addConsulta(Consulta consulta) {
@@ -27,7 +35,7 @@ public class RepositorioConsulta implements InterfaceConsulta {
         try (var conexão = Conexao.obterConexao();
              var stmt = conexão.prepareStatement(sql)) {
 
-            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(consulta.getDataConsulta()));
+            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(consulta.getDataConsulta().atStartOfDay()));
             stmt.setInt(2, consulta.getId());
             stmt.setInt(3, consulta.getMedico().getCrm());
             stmt.setInt(4, consulta.getPaciente().getId());
@@ -68,7 +76,7 @@ public class RepositorioConsulta implements InterfaceConsulta {
            try (var conexão = Conexao.obterConexao();
              var stmt = conexão.prepareStatement(sql)) {
 
-        stmt.setTimestamp(1, java.sql.Timestamp.valueOf(consultaEditado.getDataConsulta()));
+        stmt.setTimestamp(1, java.sql.Timestamp.valueOf(consultaEditado.getDataConsulta().atStartOfDay()));
         stmt.setInt(2, consultaEditado.getMedico().getCrm());
         stmt.setInt(3, consultaEditado.getPaciente().getId());
         stmt.setInt(4, consultaEditado.getId());
@@ -82,40 +90,61 @@ public class RepositorioConsulta implements InterfaceConsulta {
         }
     
     public ArrayList<Consulta> listarConsultas() {
-        
+        ArrayList<Consulta> consultas = new ArrayList<>();
+        String sql = "SELECT * FROM consulta";
 
-          var sql = "Select * from consulta";
+        RepositorioPaciente repositorioPaciente = new RepositorioPaciente();
+        RepositorioMedico repositorioMedico = new RepositorioMedico();
 
-            try (var conexão = Conexao.obterConexao();
-             var stmt = conexão.prepareStatement(sql)) {
+        try (var conexao = Conexao.obterConexao();
+             var stmt = conexao.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-        try(ResultSet rs = stmt.executeQuery()){
             while (rs.next()) {
+                int id = rs.getInt("id");
                 int pacienteId = rs.getInt("paciente_id");
-                int medicoId = rs.getInt("medico_id");
+                int medicoCrm = rs.getInt("medico_id");
+                LocalDate dataConsulta = rs.getDate("data_consulta").toLocalDate();
 
-               Consulta consulta = new Consulta(rs.getInt("id"), pacienteId, medicoId,rs.
-                );
+                Paciente paciente = repositorioPaciente.buscarPacientePorId(pacienteId);
+                Medico medico = repositorioMedico.buscarMedicoPorCrm(medicoCrm);
 
-                consultaList.add(consulta);
-                
+                Consulta consulta = new Consulta(id, paciente, medico, dataConsulta);
+                consultas.add(consulta);
             }
-        }
-
         } catch (SQLException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
-
-        return consultaList;
-
-        }
+        return consultas;
+    }
 
     public Consulta buscarConsultaPorId(int idConsulta) {
-        for (Consulta consulta : consultaList) {
-            if (consulta.getId() == idConsulta) {
-                return consulta;
+
+        Consulta consulta = null;
+
+        var sql = "Select * from consulta where id = ?";
+
+        try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+            stmt.setInt(1, idConsulta);
+
+            try(ResultSet rs = stmt.executeQuery()){
+                if (rs.next()) {
+                    int pacienteId = rs.getInt("paciente_id");
+                    int medicoId = rs.getInt("medico_id");
+
+                    Paciente paciente = repositorioPaciente.buscarPacientePorId(pacienteId);
+                    Medico medico = repositorioMedico.buscarMedicoPorCrm(medicoId);
+
+                    consulta = new Consulta(rs.getInt("id"), paciente, medico, rs.getTimestamp("data_consulta").toLocalDateTime().toLocalDate());
+                    consultaList.add(consulta);
+                }
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
+        return consulta;
     }
 }

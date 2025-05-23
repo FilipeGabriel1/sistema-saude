@@ -3,11 +3,10 @@ package co.projeto.Repositorio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-
 import co.projeto.Interfaces.InterfaceExame;
 import co.projeto.Conexao;
 import co.projeto.Entidades.Exame;
+import java.time.LocalDate;
 
 public class RepositorioExame implements InterfaceExame {
     private ArrayList<Exame> exameList;
@@ -82,31 +81,26 @@ public class RepositorioExame implements InterfaceExame {
 
       
     public ArrayList<Exame> listarExames() {
+        ArrayList<Exame> exames = new ArrayList<>();
+        String sql = "SELECT * FROM exame";
 
-         var sql = "Select * from exame";
+        try (var conexao = Conexao.obterConexao();
+             var stmt = conexao.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            try (var conexão = Conexao.obterConexao();
-             var stmt = conexão.prepareStatement(sql)) {
-
-        try(ResultSet rs = stmt.executeQuery()){
             while (rs.next()) {
-               Exame exame = new Exame(
-                rs.getInt("id"),
-                rs.getDate("data_exame").toLocalDate(),
-                rs.getString("resultado"),
-                rs.getString("tipo_exame")
-            );
+                int id = rs.getInt("id");
+                String tipoExame = rs.getString("tipo_exame");
+                LocalDate dataExame = rs.getDate("data_exame").toLocalDate();
+                String resultado = rs.getString("resultado");
 
-                exameList.add(exame);
-                
+                Exame exame = new Exame(id, tipoExame, dataExame, resultado);
+                exames.add(exame);
             }
-        }
-
         } catch (SQLException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
-
-        return exameList;
+        return exames;
     }
 
      
@@ -125,8 +119,8 @@ public class RepositorioExame implements InterfaceExame {
             while (rs.next()) {
               exame = new Exame(
                 rs.getInt("id"),
-                rs.getDate("data_exame").toLocalDate(),
                 rs.getString("resultado"),
+                rs.getDate("data_exame").toLocalDate(),
                 rs.getString("tipo_exame")
               );
 

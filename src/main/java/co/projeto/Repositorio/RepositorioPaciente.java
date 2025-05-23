@@ -81,27 +81,29 @@ public class RepositorioPaciente implements InterfacePaciente {
     }
 
     public ArrayList<Paciente> listarPacientes() {
+    ArrayList<Paciente> pacientes = new ArrayList<>();
+    String sql = "SELECT * FROM paciente";
 
-           var sql = "Select * from paciente";
+    try (var conexao = Conexao.obterConexao();
+         var stmt = conexao.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
 
-            try (var conexão = Conexao.obterConexao();
-             var stmt = conexão.prepareStatement(sql)) {
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String nome = rs.getString("nome");
+            String cpf = rs.getString("cpf");
+            String telefone = rs.getString("telefone");
+            String email = rs.getString("email");
+            String senha = rs.getString("senha");
 
-        try(ResultSet rs = stmt.executeQuery()){
-            while (rs.next()) {
-              Paciente paciente = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("email"), rs.getString("senha"));
-                pacienteList.add(paciente);
- 
-            }
+            Paciente paciente = new Paciente(id, nome, cpf, telefone, email, senha);
+            pacientes.add(paciente);
         }
-
-        } catch (SQLException e) {
-           throw new RuntimeException(e);
-        }
-
-
-        return pacienteList;
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
+    return pacientes;
+}
 
     public Paciente buscarPacientePorId(int id) {
 

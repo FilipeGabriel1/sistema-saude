@@ -86,27 +86,30 @@ public class RepositorioRecepcionista implements InterfaceRecepcionista{
       
     }
     public ArrayList<Recepcionista> listarRecepcionistas() {
+        ArrayList<Recepcionista> lista = new ArrayList<>();
+        var sql = "SELECT * FROM recepcionista";
 
-        var sql = "Select * from recepcionista";
+        try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            try (var conexão = Conexao.obterConexao();
-             var stmt = conexão.prepareStatement(sql)) {
-
-        try(ResultSet rs = stmt.executeQuery()){
             while (rs.next()) {
-                Recepcionista recepcionista = new Recepcionista(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("turno")
+                Recepcionista recepcionista = new Recepcionista(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("senha"),
+                    rs.getString("turno")
                 );
-                recepcionistaList.add(recepcionista);
- 
+                lista.add(recepcionista);
             }
-        }
-
         } catch (SQLException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
 
-        return recepcionistaList;
-
+        return lista;
     }
 
     public Recepcionista buscarRecepcionistaPorId(int idRecepcionista) {
