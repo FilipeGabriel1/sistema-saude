@@ -2,7 +2,12 @@ package co.projeto.Repositorio;
 
 
 
+import co.projeto.Conexao;
+
 import co.projeto.Entidades.Recepcionista;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import co.projeto.Interfaces.InterfaceRecepcionista;
 
@@ -14,30 +19,124 @@ public class RepositorioRecepcionista implements InterfaceRecepcionista{
     }
 
     public void addRecepcionista(Recepcionista recepcionista) {
+        
+           var sql = "insert into recepcionista (cpf, email, id, nome, senha, telefone, turno ) values (?, ?, ? , ?, ?, ?, ?)";
+
+      try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+        stmt.setString(1, recepcionista.getCpf());
+        stmt.setString(2, recepcionista.getEmail());
+        stmt.setInt(3, recepcionista.getId());
+        stmt.setString(4, recepcionista.getNome());
+        stmt.setString(5, recepcionista.getSenha());
+        stmt.setString(6, recepcionista.getTelefone());
+        stmt.setString(7, recepcionista.getTurno());
+        stmt.executeUpdate();
+
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
+        }
+       
         this.recepcionistaList.add(recepcionista);
     }
 
     public void removerRecepcionista(Recepcionista recepcionista) {
+
+        
+           var sql = "delete from recepcionista where id = ?";
+        
+        try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+    
+       stmt.setInt(1, recepcionista.getId());
+        stmt.executeUpdate();
+
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
+        }
+
+        
         this.recepcionistaList.remove(recepcionista);
     }
 
     public void editarRecepcionista(Recepcionista recepcionistaEditado) {
-        Recepcionista recepcionistaAntigo = buscarRecepcionistaPorId(recepcionistaEditado.getId());
-        if (recepcionistaAntigo != null) {
-            int index = recepcionistaList.indexOf(recepcionistaAntigo);
-            recepcionistaList.set(index, recepcionistaEditado);
+
+        
+           var sql = "update recepcionista set cpf = ?, email = ?, nome = ?, senha = ?, telefone = ?, turno = ? where id = ?";
+
+             try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+      
+            stmt.setString(1, recepcionistaEditado.getCpf());
+            stmt.setString(2, recepcionistaEditado.getEmail());   
+            stmt.setString(3, recepcionistaEditado.getNome());
+            stmt.setString(4, recepcionistaEditado.getSenha());
+            stmt.setString(5, recepcionistaEditado.getTelefone());
+            stmt.setString(6, recepcionistaEditado.getTurno());
+            stmt.setInt(7, recepcionistaEditado.getId());                
+            stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
         }
+      
     }
     public ArrayList<Recepcionista> listarRecepcionistas() {
+
+        var sql = "Select * from recepcionista";
+
+            try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+        try(ResultSet rs = stmt.executeQuery()){
+            while (rs.next()) {
+                Recepcionista recepcionista = new Recepcionista(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("turno")
+                );
+                recepcionistaList.add(recepcionista);
+ 
+            }
+        }
+
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
+        }
+
         return recepcionistaList;
+
     }
 
     public Recepcionista buscarRecepcionistaPorId(int idRecepcionista) {
-        for (Recepcionista recepcionista : recepcionistaList) {
-            if (recepcionista.getId() == idRecepcionista) {
-                return recepcionista;
+
+           Recepcionista recepcionista = null;
+
+         var sql = "Select * from recepcionista where id = ?";
+
+           try (var conexão = Conexao.obterConexao();
+             var stmt = conexão.prepareStatement(sql)) {
+
+                stmt.setInt(1, idRecepcionista);
+
+        try(ResultSet rs = stmt.executeQuery()){
+            while (rs.next()) {
+
+                recepcionista = new Recepcionista(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), rs.getString("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("turno")
+                );
+                recepcionistaList.add(recepcionista);
+
+ 
             }
         }
-        return null;
+
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
+        }
+
+        return recepcionista;
     }
-}
+       
+    }
+
