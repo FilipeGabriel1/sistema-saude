@@ -19,14 +19,14 @@ public class Paciente  extends Pessoa {
 
     @Override
 public String toString() {
-    return "Paciente{" +
-            "id=" + id +
-            ", nome='" + nome + '\'' +
-            ", cpf='" + cpf + '\'' +
-            ", telefone='" + telefone + '\'' +
-            ", email='" + email + '\'' +
-            ", senha='" + senha + '\'' +
-            '}';
+    return "---------------------------" +
+           "\nID: " + id +
+           "\nNome: " + nome +
+           "\nCPF: " + cpf +
+           "\nTelefone: " + telefone +
+           "\nEmail: " + email +
+           "\nSenha: " + senha +
+           "\n---------------------------";
 }
 
 

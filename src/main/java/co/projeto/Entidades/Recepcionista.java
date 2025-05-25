@@ -25,15 +25,15 @@ package co.projeto.Entidades;
     }
 @Override
 public String toString() {
-    return "Recepcionista{" +
-            "id=" + id +
-            ", nome='" + nome + '\'' +
-            ", cpf='" + cpf + '\'' +
-            ", telefone='" + telefone + '\'' +
-            ", email='" + email + '\'' +
-            ", senha='" + senha + '\'' +
-            ", turno='" + turno + '\'' +
-            '}';
+    return "---------------------------" +
+           "\nID: " + id +
+           "\nNome: " + nome +
+           "\nCPF: " + cpf +
+           "\nTelefone: " + telefone +
+           "\nEmail: " + email +
+           "\nSenha: " + senha +
+           "\nTurno: " + turno +
+           "\n---------------------------";
 }
 
 }

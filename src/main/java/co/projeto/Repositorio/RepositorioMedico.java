@@ -137,5 +137,28 @@ public class RepositorioMedico implements InterfaceMedico {
         return medico;
     }
 
-
+    public Medico buscarMedicoPorCrmESenha(int crm, String senha) {
+        Medico medico = null;
+        try (var conexão = Conexao.obterConexao()) {
+            String sql = "SELECT * FROM medico WHERE crm = ? AND senha = ?";
+            var stmt = conexão.prepareStatement(sql);
+            stmt.setInt(1, crm);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                medico = new Medico(
+                    rs.getInt("crm"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("senha"),
+                    rs.getString("especialidade")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return medico;
+    }
 }

@@ -50,12 +50,12 @@ public class Exame {
 
     @Override
 public String toString() {
-    return "Exame{" +
-            "id=" + id +
-            ", dataExame=" + dataExame +
-            ", resultado='" + resultado + '\'' +
-            ", tipoExame='" + tipoExame + '\'' +
-            '}';
+    return "---------------------------" +
+           "\nID: " + id +
+           "\nTipo: " + tipoExame +
+           "\nData: " + dataExame +
+           "\nResultado: " + resultado +
+           "\n---------------------------";
 }
 
 }

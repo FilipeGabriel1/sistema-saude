@@ -1,5 +1,7 @@
 package co.projeto.Repositorio;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -137,6 +139,29 @@ public class RepositorioPaciente implements InterfacePaciente {
     }
        
 
-    
+    // Exemplo de método no repositório
+    public Paciente buscarPacientePorIdESenha(int id, String senha) {
+        Paciente paciente = null;
+        try (Connection conn = Conexao.obterConexao()) {
+            String sql = "SELECT * FROM paciente WHERE id = ? AND senha = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                paciente = new Paciente(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("senha")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return paciente;
+    }
 
 }

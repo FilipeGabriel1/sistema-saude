@@ -140,6 +140,31 @@ public class RepositorioRecepcionista implements InterfaceRecepcionista{
 
         return recepcionista;
     }
+    public Recepcionista buscarRecepcionistaPorIdESenha(int id, String senha) {
+        Recepcionista recepcionista = null;
+        var sql = "SELECT * FROM recepcionista WHERE id = ? AND senha = ?";
+        try (var conexao = Conexao.obterConexao();
+             var stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.setString(2, senha);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    recepcionista = new Recepcionista(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("telefone"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("turno")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return recepcionista;
+    }
        
     }
 
