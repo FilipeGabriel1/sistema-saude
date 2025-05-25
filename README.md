@@ -2,7 +2,7 @@
 
 Este projeto é um sistema de gerenciamento para uma clínica de saúde, desenvolvido em Java com persistência de dados em MySQL. Ele permite o cadastro, edição, remoção e listagem de pacientes, médicos, recepcionistas, exames e consultas.
 
-## Autor
+## Autores
 
 - *Maria Iasmin Clementino da Silva*
 - *Filipe Gabriel Dutra Meves*
