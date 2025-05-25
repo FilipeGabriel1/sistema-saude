@@ -16,6 +16,10 @@ import co.projeto.Repositorio.RepositorioPaciente;
 import co.projeto.Repositorio.RepositorioRecepcionista;
 
 public class Main {
-     public static void main(String[] args) {
+    public static void main(String[] args) {
+    
+       System.out.println("Hello World: ");
+
      }
     }
+
