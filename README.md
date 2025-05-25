@@ -40,6 +40,8 @@ Este projeto é um sistema de gerenciamento para uma clínica de saúde, desenvo
 1. Clone o repositório:
 ```bash
 https://github.com/FilipeGabriel1/sistema-saude.git
+```
+
 2. Instale as dependências com Maven:
    ```sh
    mvn clean install
