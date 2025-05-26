@@ -55,6 +55,7 @@ https://github.com/FilipeGabriel1/sistema-saude.git
 Troque a senha em Conexoes (LightMobile123) pela sua senha do MYSQL para poder se conectar ao banco de dados.
  ```
  ```
+"PARA USAR O MAIN"
 Senha do administrador: admin123
 ID + Senha das outras entidades: olhar no banco
  ```
