@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `sistema_saude` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `sistema_saude`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sistema_saude
@@ -43,7 +41,7 @@ CREATE TABLE `consulta` (
 
 LOCK TABLES `consulta` WRITE;
 /*!40000 ALTER TABLE `consulta` DISABLE KEYS */;
-INSERT INTO `consulta` VALUES (2,3,738475,'2026-12-10'),(44,99,11111,'2025-12-10'),(55,2,1234,'2027-10-14');
+INSERT INTO `consulta` VALUES (1,1,738475,'2025-09-10'),(2,2,521348,'2025-06-24'),(3,67,734512,'2025-10-02');
 /*!40000 ALTER TABLE `consulta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +67,7 @@ CREATE TABLE `exame` (
 
 LOCK TABLES `exame` WRITE;
 /*!40000 ALTER TABLE `exame` DISABLE KEYS */;
-INSERT INTO `exame` VALUES (55,'Positivo','2025-03-05','Hemograma');
+INSERT INTO `exame` VALUES (33,'Colesterol Total','2025-05-14','180 mg/dL'),(40,'Glicemia em Jejum','2025-05-12','	92 mg/dL'),(55,'Hemograma Completo','2025-03-05','Leucócitos e hemoglobina normais');
 /*!40000 ALTER TABLE `exame` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +101,7 @@ CREATE TABLE `medico` (
 
 LOCK TABLES `medico` WRITE;
 /*!40000 ALTER TABLE `medico` DISABLE KEYS */;
-INSERT INTO `medico` VALUES (1234,'uiwdhwqd','jkash','328673273','3672373','dgjsygdwwd','873934'),(11111,'Cirurgiao Plastico','Pedrito Pedrita','129398438734','332323433','Pedrito@gmail.com','345'),(738475,'Cardiologista','Kleiton','09812345671','22222222','Kleitinho@gmail.com','lol123');
+INSERT INTO `medico` VALUES (521348,'Clinico Geral ','Rafael dos Santos','	234.567.890-12','(11) 99876-1234','rafa@icloud.com','873934'),(734512,'Cirurgiao Plastico','Pedro Jose','456.789.012-34','(21) 98765-4321','pedrito@gmail.com','345'),(738475,'Cardiologista','Kleiton Carvalho','	789.012.345-67','(31) 99444-5566','kleitinho@gmail.com','lol123');
 /*!40000 ALTER TABLE `medico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +129,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,'','','','',''),(2,'Maria Oliveira','98765432100','11888888888','maria@email.com','senha456'),(3,'João de Jesus','12345678900','11999999999','gameplaysm@gmail.com','senha567'),(67,'','','','',''),(99,'Kuka','7455347654','9883323323','Kuka@beludo.com','556');
+INSERT INTO `paciente` VALUES (1,'Paulo Henrique','253.847.910-90 ','	(81) 91234-5678','paulo@gmail.com','paulo123'),(2,'Maria Oliveira','498.130.270-62','(11) 99876-5432','maria@email.com','senha456'),(3,'João de Jesus','12345678900','(71) 98888-1234','gameplaysm@gmail.com','senha567'),(66,'Hiago Amaral','703.291.860-53','(21) 98765-4321','meuemail@gmail.com','768'),(67,'Joao Gomes','185.309.640-00','(31) 99444-3322','jao345@gmail.com','345'),(99,'Kuka Queiroz','912.478.120-40','(51) 99666-7788','Kukab@gmail.com','556');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +190,7 @@ CREATE TABLE `recepcionista` (
 
 LOCK TABLES `recepcionista` WRITE;
 /*!40000 ALTER TABLE `recepcionista` DISABLE KEYS */;
-INSERT INTO `recepcionista` VALUES (1,'Tarde','Maria','12345678900','99993333','maria@gmail.com','123'),(734634634,'Manha','Joelma','5463728191','22224444','joelma@gmail.com','joelma123');
+INSERT INTO `recepcionista` VALUES (1,'Tarde','Maria','	618.703.990-33','(71) 98888-1234','maria@gmail.com','123'),(2,'Manha','Joelma','	046.295.470-04','	(61) 99111-2222','joelma@gmail.com','joelma123');
 /*!40000 ALTER TABLE `recepcionista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -205,4 +203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-25 20:58:34
+-- Dump completed on 2025-05-26 15:25:07
