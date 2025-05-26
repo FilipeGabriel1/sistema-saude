@@ -139,7 +139,7 @@ public class RepositorioPaciente implements InterfacePaciente {
     }
        
 
-    // Exemplo de método no repositório
+  
     public Paciente buscarPacientePorIdESenha(int id, String senha) {
         Paciente paciente = null;
         try (Connection conn = Conexao.obterConexao()) {

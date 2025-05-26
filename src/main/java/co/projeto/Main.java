@@ -188,7 +188,7 @@ Scanner scanner = new Scanner(System.in);
 
                             if (escolha == 1) {
                                 System.out.print("ID: ");
-                                int pacienteIdNovo = scanner.nextInt(); // Renomeado para pacienteIdNovo
+                                int pacienteIdNovo = scanner.nextInt(); 
                                 scanner.nextLine();
                                 System.out.print("Nome: ");
                                 String nome = scanner.nextLine();
@@ -294,7 +294,7 @@ Scanner scanner = new Scanner(System.in);
 
                             if (escolha == 1) {
                                 System.out.print("ID: ");
-                                int pacienteIdNovo = scanner.nextInt(); // Renomeado para pacienteIdNovo
+                                int pacienteIdNovo = scanner.nextInt(); 
                                 scanner.nextLine();
                                 System.out.print("Nome: ");
                                 String nome = scanner.nextLine();
@@ -682,7 +682,7 @@ Scanner scanner = new Scanner(System.in);
             }
         } else if (opcao == 3) {
             System.out.print("Digite o ID do recepcionista: ");
-            int idRecepcionista = scanner.nextInt(); // Renomeado para evitar conflito
+            int idRecepcionista = scanner.nextInt(); 
             scanner.nextLine();
             System.out.print("Digite a senha do recepcionista: ");
             String senha = scanner.nextLine();

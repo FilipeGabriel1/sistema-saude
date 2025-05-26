@@ -1,7 +1,7 @@
 package co.projeto.Repositorio;
 
 
-import java.sql.Date;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import co.projeto.Interfaces.InterfaceConsulta;
 import co.projeto.Conexao;
 import co.projeto.Entidades.Consulta;
-import co.projeto.Entidades.Exame;
 import co.projeto.Entidades.Medico;
 import co.projeto.Entidades.Paciente;
 

@@ -7,10 +7,13 @@ import java.sql.SQLException;
 
 public class Conexao {
 
+    //Banco de dados MySQL
     private static final String URL = "jdbc:mysql://localhost:3306/sistema_saude";
     
+    //Usuario do Banco
     private static final String usuario = "root";
    
+    //SENHA (Mudar para a senha do seu banco)
     private static final String senha = "LightMobile123";
    
     public static Connection obterConexao() {
