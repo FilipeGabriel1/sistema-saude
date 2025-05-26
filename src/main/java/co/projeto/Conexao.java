@@ -11,7 +11,7 @@ public class Conexao {
     
     private static final String usuario = "root";
    
-    private static final String senha = "LightMobile123";
+    private static final String senha = "";
    
     public static Connection obterConexao() {
         try {
