@@ -50,4 +50,8 @@ https://github.com/FilipeGabriel1/sistema-saude.git
    ```sh
    mvn exec:java -Dexec.mainClass="co.projeto.Main"
    ```
+4. Observação
+```
+Troque a senha em Conexoes (LightMobile123) pela sua senha do MYSQL para poder se conectar ao banco de dados.
+ ```
 
